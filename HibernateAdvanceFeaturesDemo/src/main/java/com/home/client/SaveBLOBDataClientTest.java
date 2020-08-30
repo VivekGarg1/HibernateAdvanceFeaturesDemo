@@ -16,7 +16,7 @@ import com.home.entities.Phone;
 import com.home.entities.PhoneType;
 import com.home.util.HibernateUtil;
 
-public class SaveDataClientTest {
+public class SaveBLOBDataClientTest {
 
 	public static void main(String[] args) {
 		try(Session session=HibernateUtil.getSessionFactory().openSession()){
@@ -28,7 +28,10 @@ public class SaveDataClientTest {
 			employee1.setDoj(new Date());
 			employee1.setSalary(16000.00);
 			employee1.setNaturalId("987-1234567890");
-
+			session.doWork(conn ->{
+				employee1.setProfilePic(BlobProxy.generateProxy(getImage()));
+			});
+			
 			Phone phone1=new Phone();
 			phone1.setPhoneNumber("123456789");
 			phone1.setPhoneType(PhoneType.MOBILE);
@@ -105,4 +108,15 @@ public class SaveDataClientTest {
 		}
 	}
 	
+	public static byte[] getImage() {
+		Path path = Paths.get("inputProfilePics/gavin.JPG");
+		byte[] data=null;
+		try {
+			data=Files.readAllBytes(path);
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		return data;
+		}
 }

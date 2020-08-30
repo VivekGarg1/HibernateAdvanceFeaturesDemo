@@ -1,5 +1,6 @@
 package com.home.entities;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
@@ -20,10 +22,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name="employee_table")
+@DynamicUpdate
 public class Employee {
 	
 	@Id
@@ -43,9 +47,20 @@ public class Employee {
 	@Column(name = "salary")
 	private double salary;
 	
-	@NaturalId
+	//@NaturalId
+	@NaturalId(mutable = true)
 	private String naturalId;
 	
+	@Lob
+	@Column(name = "profile_pic")
+	private Blob profilePic;
+	
+	public Blob getProfilePic() {
+		return profilePic;
+	}
+	public void setProfilePic(Blob profilePic) {
+		this.profilePic = profilePic;
+	}
 	public String getNaturalId() {
 		return naturalId;
 	}

@@ -1,14 +1,8 @@
 package com.home.client;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
 
 import org.hibernate.Session;
-import org.hibernate.engine.jdbc.BlobProxy;
-
 import com.home.entities.Call;
 import com.home.entities.Employee;
 import com.home.entities.Partner;
@@ -16,7 +10,7 @@ import com.home.entities.Phone;
 import com.home.entities.PhoneType;
 import com.home.util.HibernateUtil;
 
-public class SaveDataClientTest {
+public class SaveDateTimeClientTest {
 
 	public static void main(String[] args) {
 		try(Session session=HibernateUtil.getSessionFactory().openSession()){
@@ -32,6 +26,7 @@ public class SaveDataClientTest {
 			Phone phone1=new Phone();
 			phone1.setPhoneNumber("123456789");
 			phone1.setPhoneType(PhoneType.MOBILE);
+			phone1.setPhoneDate(new Date());
 			phone1.setEmployee(employee1);
 			
 			employee1.getPhone().add(phone1);
@@ -59,6 +54,7 @@ public class SaveDataClientTest {
 			Phone phone2=new Phone();
 			phone2.setPhoneNumber("987654321");
 			phone2.setPhoneType(PhoneType.LAND_LINE);
+			phone2.setPhoneDate(new Date());
 			phone2.setEmployee(employee2);
 			
 			employee2.getPhone().add(phone2);
@@ -79,6 +75,7 @@ public class SaveDataClientTest {
 			Phone phone3=new Phone();
 			phone3.setPhoneNumber("987654321");
 			phone3.setPhoneType(PhoneType.MOBILE);
+			phone3.setPhoneDate(new Date());
 			phone3.setEmployee(employee2);
 			
 			employee2.getPhone().add(phone3);

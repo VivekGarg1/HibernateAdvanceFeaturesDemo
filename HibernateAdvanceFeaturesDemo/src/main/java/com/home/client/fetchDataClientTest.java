@@ -14,10 +14,10 @@ public class fetchDataClientTest {
 	public static void main(String[] args) {
 		SessionFactory sf=HibernateUtil.getSessionFactory();
 			//getAllEmployeeUsingHQL(sf);	
-			//getEmployeeById(sf);
+			getEmployeeById(sf);
 			//getEmployeeByIdAndEmail(sf);
 			//getAllEmployeesName(sf);
-			getAllEmployeesIdAndName(sf);
+			//getAllEmployeesIdAndName(sf);
 	}
 
 	private static void getAllEmployeesIdAndName(SessionFactory sf) {

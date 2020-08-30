@@ -1,6 +1,8 @@
 package com.home.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="phone")
@@ -39,6 +43,29 @@ public class Phone {
 	
 	@OneToMany(mappedBy = "phone",cascade =CascadeType.ALL ,orphanRemoval = true)
 	private List<Call> call=new ArrayList<Call>();
+
+	@Temporal(value = TemporalType.TIMESTAMP)
+	//@Temporal(value = TemporalType.TIME)
+	//@Temporal(value = TemporalType.DATE)
+	@Column(name="phone_date")
+	private Date phoneDate;
+	//private LocalDate phoneDate;
+	
+	public Date getPhoneDate() {
+		return phoneDate;
+	}
+
+	public void setPhoneDate(Date phoneDate) {
+		this.phoneDate = phoneDate;
+	}
+	
+	/*public LocalDate getPhoneDate() {
+		return phoneDate;
+	}
+
+	public void setPhoneDate(LocalDate phoneDate) {
+		this.phoneDate = phoneDate;
+	}*/
 
 	public Integer getPhoneId() {
 		return phoneId;
@@ -82,7 +109,8 @@ public class Phone {
 
 	@Override
 	public String toString() {
-		return "Phone [phoneId=" + phoneId + ", phoneNumber=" + phoneNumber + ", phoneType=" + phoneType+"]";
+		return "Phone [phoneId=" + phoneId + ", employee=" + employee + ", phoneNumber=" + phoneNumber + ", phoneType="
+				+ phoneType + ", phoneDate=" + phoneDate + "]";
 	}
 	
 	
